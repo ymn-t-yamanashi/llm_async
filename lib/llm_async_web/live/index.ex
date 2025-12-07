@@ -51,7 +51,7 @@ defmodule LlmAsyncWeb.Index do
 
     {:ok, stream} =
       Ollama.completion(client,
-        model: "gemma3:1b",
+        model: "gemma3:27b",
         prompt: text,
         stream: true
       )
@@ -65,14 +65,15 @@ defmodule LlmAsyncWeb.Index do
 
   def render(assigns) do
     ~H"""
-    <Layouts.flash_group flash={@flash} />
-    <div class="p-5">
-      <form>
-        <textarea id="text_input" name="text" phx-change="update_text" class="input w-[400px]">{@input_text}</textarea>
-      </form>
-      <button disabled={!@btn} class="btn" phx-click="start">実行</button>
-      <p class="m-2">{@text}</p>
-    </div>
+    <Layouts.app flash={@flash}>
+      <div class="p-5">
+        <form>
+          <textarea id="text_input" name="text" phx-change="update_text" class="input w-[400px]">{@input_text}</textarea>
+        </form>
+        <button disabled={!@btn} class="btn" phx-click="start">実行</button>
+        <p class="m-2">{@text}</p>
+      </div>
+    </Layouts.app>
     """
   end
 end
