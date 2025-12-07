@@ -26,14 +26,6 @@ defmodule LlmAsyncWeb.Index do
     {:noreply, assign(socket, input_text: new_text)}
   end
 
-  def handle_info({:end, msg}, socket) do
-    socket =
-      assign(socket, btn: true)
-      |> assign(text: msg)
-
-    {:noreply, socket}
-  end
-
   def handle_info(%{"done" => false, "response" => response}, socket) do
     text = socket.assigns.text <> response
     {:noreply, assign(socket, text: text)}
