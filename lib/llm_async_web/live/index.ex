@@ -21,8 +21,19 @@ defmodule LlmAsyncWeb.Index do
   end
 
   def run(pid) do
-    Process.sleep(1000)
-    Process.send(pid, {:end, "完了しました"}, [])
+    client = Ollama.init()
+
+    {:ok, ret} =
+      Ollama.completion(client,
+        model: "gemma3:1b",
+        prompt: "Elixirについておしえて"
+      )
+
+    ret =
+      ret
+      |> Map.get("response")
+
+    Process.send(pid, {:end, ret}, [])
     {:ok, %{ret: :ok}}
   end
 
