@@ -17,7 +17,7 @@ defmodule LlmAsyncWeb.Router do
   scope "/", LlmAsyncWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", Index, :index
   end
 
   # Other scopes may use custom stacks.
